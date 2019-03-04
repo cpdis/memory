@@ -1,98 +1,68 @@
-# Memory
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Memory (also known as Concentration) is a card game played with one or more players. Using a standard card deck (including both jokers) the players shuffle the deck and lay all of the cards face down on a surface and two cards are flipped face up over each turn. The object of the game is to turn over pairs of matching cards. Concentration can be played with any number of players or as solitaire. [Wikipedia](<https://en.wikipedia.org/wiki/Concentration_(game)>) has a good description of the game.
+## Available Scripts
 
-Your challenge is to build Memory in the browser with the requirements below.
+In the project directory, you can run:
 
-## Guidelines
+### `npm start`
 
-### Setting Up
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-1. Clone this repository
-2. Change the remote to a private github repository under your username
-3. Push code to that remote
-4. Develop
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-### To Submit
+### `npm test`
 
-1. Add github user `dylanbhughes` as a collaborator to your private repository
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### The Game
+### `npm run build`
 
-Using the provided deck in `data/deck.js`:
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-1. Shuffle the deck
-2. Display all 54 cards (jokers included) face down
-3. Clicking the back of a card should turn a card over
-4. Player can turn over 2 cards at a time
-5. When two cards are turned over:
-   - if the **number** and **color** of the cards match, the player collects the pair and the cards are removed from the board
-   - if the cards **do not** match, they turn back over and **remain in position**
-6. When a player has found all 26 pairs, the player should see a success message
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-### Requirements
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-1. One player can play one entire game
-2. Sensible tests (see [@vue/test-utils](https://vue-test-utils.vuejs.org/guides/#common-tips))
-3. Clear commit messages & history
-4. Well-styled & readible cards
+### `npm run eject`
 
-Note: I've given you a Vue app skeleton. If you wish, you can implement this with another framework (or no framework at all). If you choose to do this, please retain the `src/deck.js` file.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-### Bonus Points
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-1. Animations for card flips
-2. Snapshot tests
-3. Mobile & tablet friendly
-4. Deploy App & add deployment instructions to README
-5. Reset Button that starts an in-progess game over from the beginning
-6. Track the score
-7. Multiple player support
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-## Resources
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-- [Vue docs](https://vuejs.org/v2/guide/)
-- [Vue Test Utils docs](https://vue-test-utils.vuejs.org/)
-- [Jest docs](https://jestjs.io/)
-- [Game description](<https://en.wikipedia.org/wiki/Concentration_(game)>)
+## Learn More
 
-## Project setup
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-```bash
-nvm install
-npm install
-```
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Compiles and hot-reloads for development
+### Code Splitting
 
-```bash
-npm run serve
-```
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Compiles and minifies for production
+### Analyzing the Bundle Size
 
-```bash
-npm run build
-```
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Run your tests
+### Making a Progressive Web App
 
-```bash
-npm run test
-```
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Lints and fixes files
+### Advanced Configuration
 
-```bash
-npm run lint
-```
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Run your unit tests
+### Deployment
 
-```bash
-npm run test:unit
-```
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### Customize configuration
+### `npm run build` fails to minify
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

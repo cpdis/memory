@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Card from "../Card"
+
 import cards from '../../data/deck'
 import shuffle from '../../utils/shuffle'
 
@@ -43,6 +45,17 @@ export default class Game extends Component {
             <div>
                 <h1>Memory</h1>
                 <p>Memory (also known as Concentration) is a card game played with one or more players. Using a standard card deck (including both jokers) the players shuffle the deck and lay all of the cards face down on a surface and two cards are flipped face up over each turn. The object of the game is to turn over pairs of matching cards. Concentration can be played with any number of players or as solitaire.</p>
+                <div>
+                    {cards.map(i => (
+                        <Card
+                            key={i}
+                            // TODO: Add image URL
+                            isMatched={matched.includes(i)}
+                            isSelected={selected.includes(i)}
+                            onClick={() => this.selectHandler(i)}
+                        />
+                    ))}
+                </div>
             </div>
         )
     }

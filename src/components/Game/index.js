@@ -6,23 +6,6 @@ import shuffle from '../../utils/shuffle'
 
 import styled from "styled-components";
 
-const GameContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px;
-  overflow: hidden;
-`;
-
-const CardContainer = styled.div`
-  flex: 0 1 20%;
-  max-width: 100px;
-  height: 140px;
-  border-radius: 4px;
-  margin: 20px 25px 20px 0px;
-  overflow: hidden;
-`;
-
 const initializeCards = (arr) => {
     return shuffle(arr)
 }
@@ -34,12 +17,13 @@ export default class Game extends Component {
         this.state = {
             cards: initializeCards(deck),
             matched: [],
-            selected: []
+            selected: [],
+            moves: 0
         }
     }
 
     selectHandler = (index) => {
-        const { cards, matched, selected } = this.state
+        const { cards, matched, selected, moves } = this.state
 
         if (selected.length === 0) { // Select the first card
             this.setState({ selected: [index] })
@@ -56,12 +40,14 @@ export default class Game extends Component {
                 this.setState({
                     cards: cards,
                     matched: matched.concat([selected[0], index]),
-                    selected: []
+                    selected: [],
+                    moves: moves + 1
                 })
             } else {
                 // The cards are not a match
                 this.setState({
-                    selected: [selected[0], index]
+                    selected: [selected[0], index],
+                    moves: moves + 1
                 })
                 setTimeout(() => {
                     this.setState({ selected: [] })
@@ -79,7 +65,7 @@ export default class Game extends Component {
     // }
 
     render() {
-        const { cards, matched, selected } = this.state
+        const { cards, matched, selected, moves } = this.state
 
         if (this.state.matched === this.state.cards.length / 2) {
             alert('You Win!');
@@ -87,13 +73,24 @@ export default class Game extends Component {
 
         return (
             <div>
-                <h1>Memory</h1>
-                <h2>Matched: {matched.length / 2}</h2>
+                <Container>
+                    <NavBar>
+                        <Memory>
+                            <h1>Memory</h1>
+                        </Memory>
+                        <GameInfo>
+                            <h2>Matched: {matched.length / 2}</h2>
+                            <h2>Moves: {moves}</h2>
+                        </GameInfo>
+                    </NavBar>
+                </Container>
                 {/* <button onClick={() => this.resetGame()}>Reset</button> */}
-                <p><strong>Directions: </strong>Using a standard card deck (including both jokers)
-                the players shuffle the deck and lay all of the cards face down on a surface and
-                two cards are flipped face up over each turn. The object of the game is to turn
-                over pairs of matching cards.</p>
+                <DirectionsContainer>
+                    <strong>Directions: </strong>Using a standard card deck (including both jokers)
+                    the players shuffle the deck and lay all of the cards face down on a surface and
+                    two cards are flipped face up over each turn. The object of the game is to turn
+                    over pairs of matching cards.
+                </DirectionsContainer>
                 <GameContainer>
                     {cards.map((card, i) => (
                         <CardContainer key={i}>
@@ -110,3 +107,57 @@ export default class Game extends Component {
         )
     }
 }
+
+// Styled components
+const Container = styled.div`
+    width: 100%;
+    box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0, 0, 0, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.24);
+`;
+
+const NavBar = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1080px;
+    width: 100%;
+`;
+
+const Memory = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    width: 66%;
+`;
+
+const GameInfo = styled.div`
+    display: flex;
+    justify-content: space-around;
+    padding: 0px 10px;
+    width: 33%;
+`;
+
+const DirectionsContainer = styled.div`
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-top: 20px;
+`;
+
+const GameContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px;
+    overflow: hidden;
+    max-width: 1080px;
+    margin: 0 auto;
+`;
+
+const CardContainer = styled.div`
+    flex: 0 1 20%;
+    max-width: 100px;
+    height: 140px;
+    border-radius: 4px;
+    margin: 20px 10px 0px 10px;
+    overflow: hidden;
+`;

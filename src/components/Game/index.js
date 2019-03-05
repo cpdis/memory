@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CardTemplate from "../CardTemplate"
 
-import cards from '../../data/deck'
+import deck from '../../data/deck'
 import shuffle from '../../utils/shuffle'
 
 import styled from "styled-components";
@@ -23,18 +23,22 @@ const CardContainer = styled.div`
   overflow: hidden;
 `;
 
+const initializeCards = (arr) => {
+    return shuffle(arr)
+}
+
 export default class Game extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            cards: shuffle(cards),
+            cards: initializeCards(deck),
             matched: [],
             selected: []
         }
     }
 
-    selectHandler(index) {
+    selectHandler = (index) => {
         const { cards, matched, selected } = this.state
 
         if (selected.length === 0) { // Select the first card
@@ -61,25 +65,42 @@ export default class Game extends Component {
                 })
                 setTimeout(() => {
                     this.setState({ selected: [] })
-                }, 1000);
+                }, 1250);
             }
         }
     }
 
+    // resetGame = () => {
+    //     this.setState({
+    //         cards: initializeCards(deck),
+    //         matched: [],
+    //         selected: []
+    //     })
+    // }
+
     render() {
-        const { cards, matched } = this.state
+        const { cards, matched, selected } = this.state
+
+        if (this.state.matched === this.state.cards.length / 2) {
+            alert('You Win!');
+        }
 
         return (
             <div>
                 <h1>Memory</h1>
                 <h2>Matched: {matched.length / 2}</h2>
-                <p>Memory (also known as Concentration) is a card game played with one or more players. Using a standard card deck (including both jokers) the players shuffle the deck and lay all of the cards face down on a surface and two cards are flipped face up over each turn. The object of the game is to turn over pairs of matching cards. Concentration can be played with any number of players or as solitaire.</p>
+                {/* <button onClick={() => this.resetGame()}>Reset</button> */}
+                <p><strong>Directions: </strong>Using a standard card deck (including both jokers)
+                the players shuffle the deck and lay all of the cards face down on a surface and
+                two cards are flipped face up over each turn. The object of the game is to turn
+                over pairs of matching cards.</p>
                 <GameContainer>
                     {cards.map((card, i) => (
                         <CardContainer key={i}>
                             <CardTemplate
                                 key={i}
                                 card={card}
+                                selected={selected.includes(i)}
                                 selectHandler={() => this.selectHandler(i)}
                             />
                         </CardContainer>

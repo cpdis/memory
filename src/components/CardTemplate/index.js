@@ -1,13 +1,17 @@
 import React from 'react'
 
-const CardTemplate = ({ card, selected, selectHandler }) => {
+const CardTemplate = ({ card, selected, matched, selectHandler }) => {
     let display = ''
     selected ? display = card.img : display = require('../../data/SVG_Cards/back.png')
 
     return (
-        <div onClick={() => { selectHandler() }}>
+        <div onClick={() => {
+            if (!selected) {
+                selectHandler()
+            }
+        }}>
             <img
-                src={display}
+                src={card.img}
                 alt={card.suit}
                 style={{ width: "100px", height: "140px" }}
             />

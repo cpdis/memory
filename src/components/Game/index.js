@@ -6,16 +6,12 @@ import shuffle from '../../utils/shuffle'
 
 import styled from "styled-components";
 
-const initializeCards = (arr) => {
-    return shuffle(arr)
-}
-
 export default class Game extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            cards: initializeCards(deck),
+            cards: shuffle(deck),
             matched: [],
             selected: [],
             moves: 0
@@ -30,7 +26,8 @@ export default class Game extends Component {
         } else if (selected.length === 1) { // Select the second card
             if (cards[selected[0]].value === cards[index].value &&  // Check if card value is matching
                 ((cards[selected[0]].suit === ("hearts" || "diamonds")) === (cards[index].suit === ("hearts" || "diamonds")) ||
-                    (cards[selected[0]].suit === ("spades" || "clubs")) === (cards[index].suit === ("spades" || "clubs")))) {
+                    (cards[selected[0]].suit === ("spades" || "clubs")) === (cards[index].suit === ("spades" || "clubs")) ||
+                    (cards[selected[0]].suit === cards[index].suit))) {
 
                 // Remove the matched cards from the deck
                 cards.splice(selected[0], 1)
@@ -49,6 +46,8 @@ export default class Game extends Component {
                     selected: [selected[0], index],
                     moves: moves + 1
                 })
+
+                // Give the player time to look at the cards before flipping over
                 setTimeout(() => {
                     this.setState({ selected: [] })
                 }, 1250);
@@ -56,55 +55,77 @@ export default class Game extends Component {
         }
     }
 
-    // resetGame = () => {
-    //     this.setState({
-    //         cards: initializeCards(deck),
-    //         matched: [],
-    //         selected: []
-    //     })
-    // }
+    resetGame = () => {
+        this.setState({
+            cards: shuffle(deck),
+            matched: [],
+            selected: [],
+            moves: 0
+        })
+    }
 
     render() {
         const { cards, matched, selected, moves } = this.state
 
-        if (this.state.matched === this.state.cards.length / 2) {
-            alert('You Win!');
-        }
+        console.log(cards.length)
+        console.log(deck.length)
+        if (cards.length === 0) {
+            return (
+                <div>
+                    <Container>
+                        <NavBar>
+                            <Memory>
+                                <h1>Prefect Memory</h1>
+                            </Memory>
+                            <GameInfo>
+                                <h2>Matched: {matched.length / 2}</h2>
+                                <h2>Moves: {moves}</h2>
+                                <button onClick={() => this.resetGame()}>Reset</button>
+                            </GameInfo>
+                        </NavBar>
+                    </Container>
 
-        return (
-            <div>
-                <Container>
-                    <NavBar>
-                        <Memory>
-                            <h1>Memory</h1>
-                        </Memory>
-                        <GameInfo>
-                            <h2>Matched: {matched.length / 2}</h2>
-                            <h2>Moves: {moves}</h2>
-                        </GameInfo>
-                    </NavBar>
-                </Container>
-                {/* <button onClick={() => this.resetGame()}>Reset</button> */}
-                <DirectionsContainer>
-                    <strong>Directions: </strong>Using a standard card deck (including both jokers)
-                    the players shuffle the deck and lay all of the cards face down on a surface and
-                    two cards are flipped face up over each turn. The object of the game is to turn
-                    over pairs of matching cards.
-                </DirectionsContainer>
-                <GameContainer>
-                    {cards.map((card, i) => (
-                        <CardContainer key={i}>
-                            <CardTemplate
-                                key={i}
-                                card={card}
-                                selected={selected.includes(i)}
-                                selectHandler={() => this.selectHandler(i)}
-                            />
-                        </CardContainer>
-                    ))}
-                </GameContainer>
-            </div>
-        )
+                    <WinContainer>🎉 You win! 🎉</WinContainer>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <Container>
+                        <NavBar>
+                            <Memory>
+                                <h1>Prefect Memory</h1>
+                            </Memory>
+                            <GameInfo>
+                                <h2>Matched: {matched.length / 2}</h2>
+                                <h2>Moves: {moves}</h2>
+                                <button onClick={() => this.resetGame()}>Reset</button>
+                            </GameInfo>
+                        </NavBar>
+                    </Container>
+                    {/* <button onClick={() => this.resetGame()}>Reset</button> */}
+                    <DirectionsContainer>
+                        <strong>Directions: </strong>Using a standard card deck (including both jokers)
+                        the players shuffle the deck and lay all of the cards face down on a surface and
+                        two cards are flipped face up over each turn. The object of the game is to turn
+                        over pairs of matching cards.
+                        </DirectionsContainer>
+                    <GameContainer>
+                        {cards.map((card, i) => (
+                            <CardContainer key={i}>
+                                <CardTemplate
+                                    key={i}
+                                    card={card}
+                                    matched={matched}
+                                    selected={selected.includes(i)}
+                                    selectHandler={() => this.selectHandler(i)}
+                                />
+                            </CardContainer>
+                        ))}
+                    </GameContainer>
+                </div>
+            )
+        }
     }
 }
 
@@ -138,6 +159,7 @@ const GameInfo = styled.div`
 `;
 
 const DirectionsContainer = styled.div`
+    text-align: left;
     max-width: 1080px;
     margin: 0 auto;
     padding-top: 20px;
@@ -160,4 +182,11 @@ const CardContainer = styled.div`
     border-radius: 4px;
     margin: 20px 10px 0px 10px;
     overflow: hidden;
+`;
+
+const WinContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    font-size: 100px;
+    padding-top: 30vh;
 `;

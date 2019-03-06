@@ -39,12 +39,14 @@ export default class Game extends Component {
                 }
 
                 // Update the card deck and matched cards to matched
-                this.setState({
-                    cards: cards,
-                    matched: matched.concat([selected[0], index]),
-                    selected: [],
-                    moves: moves + 1
-                })
+                setTimeout(() => {
+                    this.setState({
+                        cards: cards,
+                        matched: matched.concat([selected[0], index]),
+                        selected: [],
+                        moves: moves + 1
+                    })
+                }, 1000)
             } else {
                 // The cards are not a match
                 this.setState({
@@ -55,7 +57,7 @@ export default class Game extends Component {
                 // Give the player time to look at the cards before flipping over
                 setTimeout(() => {
                     this.setState({ selected: [] })
-                }, 1250);
+                }, 1000);
             }
         }
     }
@@ -152,12 +154,14 @@ const NavBar = styled.div`
 const Memory = styled.div`
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     width: 66%;
 `;
 
 const GameInfo = styled.div`
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 0px 10px;
     width: 33%;
 `;
@@ -197,8 +201,7 @@ const WinContainer = styled.div`
 
 const Button = styled.button`
     height: 40px;
-    width: 50px;
+    width: 75px;
     background: white;
-    margin-top: 20px;
     border-radius: 3px;
 `;

@@ -11,7 +11,7 @@ const CardTemplate = ({ card, selected, matched, selectHandler }) => {
             }
         }}>
             <img
-                src={card.img}
+                src={display}
                 alt={card.suit}
                 style={{ width: "100px", height: "140px" }}
             />

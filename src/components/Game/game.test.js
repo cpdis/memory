@@ -33,13 +33,6 @@ describe('GAME', () => {
             img: require('../../data/SVG_Cards/2_of_hearts.svg')
         }
 
-        const card2 = {
-            id: 2,
-            suit: 'diamonds',
-            value: 2,
-            img: require('../../data/SVG_Cards/2_of_diamonds.svg')
-        }
-
         const cardComponent = render(<CardTemplate card={card1} />)
         const cardButton = cardComponent.getByTestId("button")
         fireEvent.click(cardButton)

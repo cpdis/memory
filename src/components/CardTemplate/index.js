@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 const CardTemplate = ({ card, selected, selectHandler }) => {
     let display = ''
@@ -18,6 +19,12 @@ const CardTemplate = ({ card, selected, selectHandler }) => {
             />
         </div>
     )
+}
+
+CardTemplate.propTypes = {
+    card: PropTypes.object,
+    selected: PropTypes.bool,
+    selectHandeler: PropTypes.func
 }
 
 export default CardTemplate

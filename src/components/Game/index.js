@@ -30,8 +30,13 @@ export default class Game extends Component {
                     (cards[selected[0]].suit === cards[index].suit))) {
 
                 // Remove the matched cards from the deck
-                cards.splice(selected[0], 1)
-                cards.splice(index, 1)
+                if (selected[0] > index) {
+                    cards.splice(selected[0], 1)
+                    cards.splice(index, 1)
+                } else {
+                    cards.splice(index, 1)
+                    cards.splice(selected[0], 1)
+                }
 
                 // Update the card deck and matched cards to matched
                 this.setState({
@@ -80,7 +85,7 @@ export default class Game extends Component {
                             <GameInfo>
                                 <h2>Matched: {matched.length / 2}</h2>
                                 <h2>Moves: {moves}</h2>
-                                <button onClick={() => this.resetGame()}>Reset</button>
+                                <Button onClick={() => this.resetGame()}>Reset</Button>
                             </GameInfo>
                         </NavBar>
                     </Container>
@@ -99,7 +104,7 @@ export default class Game extends Component {
                             <GameInfo>
                                 <h2>Matched: {matched.length / 2}</h2>
                                 <h2>Moves: {moves}</h2>
-                                <button onClick={() => this.resetGame()}>Reset</button>
+                                <Button onClick={() => this.resetGame()}>Reset</Button>
                             </GameInfo>
                         </NavBar>
                     </Container>
@@ -139,7 +144,6 @@ const Container = styled.div`
 const NavBar = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin: 0 auto;
     max-width: 1080px;
     width: 100%;
@@ -189,4 +193,12 @@ const WinContainer = styled.div`
     justify-content: center;
     font-size: 100px;
     padding-top: 30vh;
+`;
+
+const Button = styled.button`
+    height: 40px;
+    width: 50px;
+    background: white;
+    margin-top: 20px;
+    border-radius: 3px;
 `;

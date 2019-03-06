@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import CardTemplate from "../CardTemplate"
+import PropTypes from 'prop-types';
+import styled from "styled-components";
 
+import CardTemplate from "../CardTemplate"
 import deck from '../../data/deck'
 import shuffle from '../../utils/shuffle'
-
-import styled from "styled-components";
 
 export default class Game extends Component {
     constructor(props) {
@@ -118,6 +118,15 @@ export default class Game extends Component {
             )
         }
     }
+}
+
+// Type checking
+Game.propTypes = {
+    cards: PropTypes.array,
+    matched: PropTypes.array,
+    selected: PropTypes.bool,
+    moves: PropTypes.number,
+    selectHandler: PropTypes.func
 }
 
 // Styled components

@@ -74,8 +74,6 @@ export default class Game extends Component {
     render() {
         const { cards, matched, selected, moves } = this.state
 
-        console.log(cards.length)
-        console.log(deck.length)
         if (cards.length === 0) {
             return (
                 <div>
@@ -85,8 +83,8 @@ export default class Game extends Component {
                                 <h1>Prefect Memory</h1>
                             </Memory>
                             <GameInfo>
-                                <Score>Matched: {matched.length / 2}</Score>
-                                <Score>Moves: {moves}</Score>
+                                <Score data-testid="matched">Matched: {matched.length / 2}</Score>
+                                <Score data-testid="moves">Moves: {moves}</Score>
                                 {/* <Button onClick={() => this.resetGame()}>Reset</Button> */}
                             </GameInfo>
                         </NavBar>
@@ -103,8 +101,8 @@ export default class Game extends Component {
                                 <h1>Prefect Memory</h1>
                             </Memory>
                             <GameInfo>
-                                <Score>Matched: {matched.length / 2}</Score>
-                                <Score>Moves: {moves}</Score>
+                                <Score data-testid="matched">Matched: {matched.length / 2}</Score>
+                                <Score data-testid="moves">Moves: {moves}</Score>
                                 {/* <Button onClick={() => this.resetGame()}>Reset</Button> */}
                             </GameInfo>
                         </NavBar>

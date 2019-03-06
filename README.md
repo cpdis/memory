@@ -7,3 +7,21 @@ From the [source repository](https://github.com/PrefectHQ/memory):
 
  ## Project Setup
  
+ Copy the following into your terminal:
+
+ ```bash
+ git clone https://github.com/cpdis/memory.git
+ ```
+
+ To run locally:
+
+ ```bash
+ yarn
+ yarn start
+ ```
+
+ To test:
+
+ ```bash
+ yarn test --verbose
+ ```

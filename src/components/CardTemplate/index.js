@@ -7,7 +7,7 @@ const CardTemplate = ({ card, selected, selectHandler }) => {
     return (
         <div data-testid="button"
             onClick={() => {
-                if (!selected) {
+                if (!selected) { // Check to see if card is already selected
                     selectHandler()
                 }
             }}>

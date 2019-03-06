@@ -38,7 +38,7 @@ export default class Game extends Component {
                     cards.splice(selected[0], 1)
                 }
 
-                // Update the card deck and matched cards to matched
+                // Update the card deck, add matched cards to matched, reset selected, and increase move count
                 setTimeout(() => {
                     this.setState({
                         cards: cards,
@@ -46,7 +46,7 @@ export default class Game extends Component {
                         selected: [],
                         moves: moves + 1
                     })
-                }, 1000)
+                }, 250)
             } else {
                 // The cards are not a match
                 this.setState({
@@ -60,15 +60,6 @@ export default class Game extends Component {
                 }, 1000);
             }
         }
-    }
-
-    resetGame = () => {
-        this.setState({
-            cards: shuffle(deck),
-            matched: [],
-            selected: [],
-            moves: 0
-        })
     }
 
     render() {
@@ -85,11 +76,10 @@ export default class Game extends Component {
                             <GameInfo>
                                 <Score data-testid="matched">Matched: {matched.length / 2}</Score>
                                 <Score data-testid="moves">Moves: {moves}</Score>
-                                {/* <Button onClick={() => this.resetGame()}>Reset</Button> */}
                             </GameInfo>
                         </NavBar>
                     </Container>
-                    <WinContainer>🎉 You win! 🎉</WinContainer>
+                    <WinContainer><span role="img" aria-label="celebrate">🎉</span> You win! <span role="img" aria-label="celebrate">🎉</span></WinContainer>
                 </div>
             )
         } else {
@@ -103,7 +93,6 @@ export default class Game extends Component {
                             <GameInfo>
                                 <Score data-testid="matched">Matched: {matched.length / 2}</Score>
                                 <Score data-testid="moves">Moves: {moves}</Score>
-                                {/* <Button onClick={() => this.resetGame()}>Reset</Button> */}
                             </GameInfo>
                         </NavBar>
                     </Container>
@@ -196,11 +185,4 @@ const WinContainer = styled.div`
     justify-content: center;
     font-size: 100px;
     padding-top: 30vh;
-`;
-
-const Button = styled.button`
-    height: 40px;
-    width: 75px;
-    background: white;
-    border-radius: 3px;
 `;

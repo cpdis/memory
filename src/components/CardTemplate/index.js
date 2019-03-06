@@ -5,11 +5,12 @@ const CardTemplate = ({ card, selected, selectHandler }) => {
     selected ? display = card.img : display = require('../../data/SVG_Cards/back.png')
 
     return (
-        <div onClick={() => {
-            if (!selected) {
-                selectHandler()
-            }
-        }}>
+        <div data-testid="button"
+            onClick={() => {
+                if (!selected) {
+                    selectHandler()
+                }
+            }}>
             <img
                 src={display}
                 alt={card.suit}

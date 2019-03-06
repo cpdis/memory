@@ -18,4 +18,13 @@ describe('CARD', () => {
         ReactDOM.render(<CardTemplate card={card} />, div)
         ReactDOM.unmountComponentAtNode(div)
     })
+
+    it("Has correct height and width", () => {
+        const component = render(<CardTemplate card={card} />)
+        const img = component.getByAltText("hearts")
+        expect(img).toHaveStyle(`
+            width: 100px;
+            height: 140px;
+        `)
+    })
 })

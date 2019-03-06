@@ -119,7 +119,6 @@ export default class Game extends Component {
                                 <CardTemplate
                                     key={i}
                                     card={card}
-                                    matched={matched}
                                     selected={selected.includes(i)}
                                     selectHandler={() => this.selectHandler(i)}
                                 />

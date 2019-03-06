@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CardTemplate = ({ card, selected, matched, selectHandler }) => {
+const CardTemplate = ({ card, selected, selectHandler }) => {
     let display = ''
     selected ? display = card.img : display = require('../../data/SVG_Cards/back.png')
 

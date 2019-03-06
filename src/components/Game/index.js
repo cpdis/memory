@@ -25,9 +25,9 @@ export default class Game extends Component {
             this.setState({ selected: [index] })
         } else if (selected.length === 1) { // Select the second card
             if (cards[selected[0]].value === cards[index].value &&  // Check if card value is matching
-                ((cards[selected[0]].suit === ("hearts" || "diamonds")) === (cards[index].suit === ("hearts" || "diamonds")) ||
-                    (cards[selected[0]].suit === ("spades" || "clubs")) === (cards[index].suit === ("spades" || "clubs")) ||
-                    (cards[selected[0]].suit === cards[index].suit))) {
+                ((cards[selected[0]].suit === ("hearts" || "diamonds")) === (cards[index].suit === ("hearts" || "diamonds")) || // Red cards
+                    (cards[selected[0]].suit === ("spades" || "clubs")) === (cards[index].suit === ("spades" || "clubs")) || // Black cards
+                    (cards[selected[0]].suit === cards[index].suit))) { // Jokers
 
                 // Remove the matched cards from the deck
                 if (selected[0] > index) {
@@ -85,13 +85,12 @@ export default class Game extends Component {
                                 <h1>Prefect Memory</h1>
                             </Memory>
                             <GameInfo>
-                                <h2>Matched: {matched.length / 2}</h2>
-                                <h2>Moves: {moves}</h2>
-                                <Button onClick={() => this.resetGame()}>Reset</Button>
+                                <Score>Matched: {matched.length / 2}</Score>
+                                <Score>Moves: {moves}</Score>
+                                {/* <Button onClick={() => this.resetGame()}>Reset</Button> */}
                             </GameInfo>
                         </NavBar>
                     </Container>
-
                     <WinContainer>🎉 You win! 🎉</WinContainer>
                 </div>
             )
@@ -104,13 +103,12 @@ export default class Game extends Component {
                                 <h1>Prefect Memory</h1>
                             </Memory>
                             <GameInfo>
-                                <h2>Matched: {matched.length / 2}</h2>
-                                <h2>Moves: {moves}</h2>
-                                <Button onClick={() => this.resetGame()}>Reset</Button>
+                                <Score>Matched: {matched.length / 2}</Score>
+                                <Score>Moves: {moves}</Score>
+                                {/* <Button onClick={() => this.resetGame()}>Reset</Button> */}
                             </GameInfo>
                         </NavBar>
                     </Container>
-                    {/* <button onClick={() => this.resetGame()}>Reset</button> */}
                     <DirectionsContainer>
                         <strong>Directions: </strong>Using a standard card deck (including both jokers)
                         the players shuffle the deck and lay all of the cards face down on a surface and
@@ -155,6 +153,7 @@ const Memory = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    padding-left: 20px;
     width: 66%;
 `;
 
@@ -162,15 +161,18 @@ const GameInfo = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0px 10px;
     width: 33%;
+`;
+
+const Score = styled.h3`
+    padding-right: 20px;
 `;
 
 const DirectionsContainer = styled.div`
     text-align: left;
     max-width: 1080px;
     margin: 0 auto;
-    padding-top: 20px;
+    padding: 20px 20px 0 20px;
 `;
 
 const GameContainer = styled.div`
